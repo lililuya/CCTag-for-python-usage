@@ -1,4 +1,4 @@
-# 编译CCTag作为Python包使用
+# 编译CCTag作为Python包使用（用于检测同心圆圆心）
 > 摘自原始仓库的issue，https://github.com/alicevision/CCTag/issues/136
 ## 测试环境
 - ubuntu22.04 LTS
