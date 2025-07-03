@@ -1,7 +1,7 @@
 # 编译CCTag作为Python包使用
 ## 1.目录结构
 ```txt
-|--CCTag-develop
+|--CCTag-for-python-usage
     |--pycctag
         |--build (编译产生)
         |--thirdparty
@@ -11,7 +11,7 @@
         |--CMakeLists.txt
 ```
 
-## 2.编译CCTag-develop
+## 2.编译CCTag-for-python-usage
 - 下载[CCTag](https://github.com/alicevision/CCTag)
     - `git clone https://github.com/alicevision/CCTag.git`
 - 安装必须的库
@@ -28,16 +28,15 @@ find /usr -name "TBBConfig.cmake" 2>/dev/null
 set(CMAKE_PREFIX_PATH "/usr/share/eigen3/cmake/")
 set(CMAKE_INSTALL_PREFIX "/usr/local/lib/cmake/opencv4/")
 ```
-- cmake编译
+- cmake编译(此处为非cuda,适配无GPU场景)
     - 构建cmake configuration
         - `sudo make build && cd build`
         - `cmake .. -DCCTAG_WITH_CUDA:BOOL=OFF`
-
     - 编译
         - `make -j nproc `
     - 结果
         - build目录下会产生so文件和CCTag的cmake config
-        - 例如：`/mnt/hd1/cxh/liwen/CCTag-develop/build/src/generated/CCTagConfig.cmake`
+        - 例如：`./CCTag-for-python-usage/build/src/generated/CCTagConfig.cmake`
 ## 3. 配置pybind11 cpp接口
 - 创建pycctag.cpp
 ```cpp
@@ -129,7 +128,7 @@ project(pycctag)
 
 # set the path includes CCTagConfig.cmake
 find_package(CCTag CONFIG REQUIRED
-	     PATHS /mnt/hd1/cxh/liwen/CCTag-develop/build/src/generated
+	     PATHS ./CCTag-for-python-usage/build/src/generated
 	     NO_DEFAULT_PATH
 )
 # set opencv(ignore)
@@ -142,7 +141,7 @@ pybind11_add_module(pycctag pycctag.cpp)
 # add header file
 target_include_directories(pycctag PUBLIC
     ${CCTAG_INSTALL}/include/cctag
-    /mnt/hd1/cxh/liwen/CCTag-develop/src/cctag
+    ./CCTag-for-python-usage/src/cctag
 )
 target_link_libraries(pycctag PUBLIC CCTag)
 
@@ -165,11 +164,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ```python
 import cv2
 # import sys
-# sys.path.append("/mnt/hd1/cxh/liwen/CCTag-develop/python_pakage/pycctag")
+# sys.path.append("./CCTag-for-python-usage/python_pakage/pycctag")
 import pycctag
 
-markervector = pycctag.detect_from_file("/mnt/hd1/cxh/liwen/CCTag-develop/sample/01.png")
-image = cv2.imread("/mnt/hd1/cxh/liwen/CCTag-develop/sample/01.png")
+markervector = pycctag.detect_from_file("./CCTag-for-python-usage/sample/01.png")
+image = cv2.imread("./CCTag-for-python-usage/sample/01.png")
 markerlist = list(markervector)
 for i in range(len(markerlist)):
     print(str(markerlist[i].id)+"   "+str(markerlist[i].status))
@@ -177,7 +176,7 @@ for i in range(len(markerlist)):
     pointx = int(markerlist[i].x)
     pointy = int(markerlist[i].y)
     cv2.circle(image, (pointx, pointy), radius=10, color=(0, 255, 0), thickness=-1)
-cv2.imwrite("/mnt/hd1/cxh/liwen/CCTag-develop/sample/01_result.png", image)
+cv2.imwrite("./CCTag-for-python-usage/sample/01_result.png", image)
 ```
 
 ## 6.报错解决
