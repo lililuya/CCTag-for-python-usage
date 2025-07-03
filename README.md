@@ -181,9 +181,12 @@ cv2.imwrite("./CCTag-for-python-usage/sample/01_result.png", image)
 
 ## 6.报错解决
 ```bash
-libstdc++.so.6: version `GLIBCXX_3.4.30‘ not found
+libstdc++.so.6: version `GLIBCXX_3.4.30` not found
 ```
 - 主要在conda环境下碰到
 - 将`libstdc++.so.6`链接到当前conda环境即可
 
 
+## 7. 精度问题
+- [参考](https://github.com/alicevision/CCTag/issues/179) 
+- `some issue with Eigen's lazy evaluation`
