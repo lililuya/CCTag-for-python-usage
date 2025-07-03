@@ -1,4 +1,11 @@
 # 编译CCTag作为Python包使用
+> 摘自原始仓库的issue，https://github.com/alicevision/CCTag/issues/136
+## 测试环境
+- ubuntu22.04 LTS
+- python-3.10
+- ninja-1.11.1.3
+- Cython-3.0.11
+- gcc (Ubuntu 11.4.0-9ubuntu1) 11.4.0
 ## 1.目录结构
 ```txt
 |--CCTag-for-python-usage
@@ -188,5 +195,6 @@ libstdc++.so.6: version `GLIBCXX_3.4.30` not found
 
 
 ## 7. 精度问题
+- 在某些机器上会出现检测精度急剧下降的情况，主要是Eigen库的懒加载问题导致的
 - [参考](https://github.com/alicevision/CCTag/issues/179) 
 - `some issue with Eigen's lazy evaluation`
