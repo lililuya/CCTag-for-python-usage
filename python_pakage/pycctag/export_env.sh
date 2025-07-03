@@ -1,0 +1,1 @@
+export PYTHONPATH=/mnt/hd1/cxh/liwen/CCTag-develop/python_pakage/pycctag:$PYTHONPATH
