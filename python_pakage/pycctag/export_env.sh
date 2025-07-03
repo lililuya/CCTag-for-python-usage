@@ -1,1 +1,1 @@
-export PYTHONPATH=/mnt/hd1/cxh/liwen/CCTag-develop/python_pakage/pycctag:$PYTHONPATH
+export PYTHONPATH=./CCTag-for-python-usage/python_pakage/pycctag:$PYTHONPATH
